@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 //Agora stuff
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
+
 // replace with your App ID from Agora.io
-const APP_ID = "example";
+const APP_ID = "595b608807b8466cbc52b944e54eb5a0";
 
 class VideoRoom extends StatefulWidget {
   /// non-modifiable channel name of the page
@@ -18,8 +19,7 @@ class VideoRoom extends StatefulWidget {
   }
 }
 
-class VideoRoomState extends State<VideoRoom>{
-  
+class VideoRoomState extends State<VideoRoom> {
   static final _users = List<int>();
   final _infoStrings = <String>[];
   bool muted = false;
@@ -35,13 +35,13 @@ class VideoRoomState extends State<VideoRoom>{
   }
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     init();
   }
 
   // initialize agora sdk
-  init() async{
+  init() async {
     initialize();
   }
 
@@ -59,8 +59,8 @@ class VideoRoomState extends State<VideoRoom>{
     _addAgoraEventHandlers();
     AgoraRtcEngine.enableWebSdkInteroperability(true);
     // set parameters for Agora Engine
-    AgoraRtcEngine.setParameters('{\"che.video.lowBitRateStreamParameter\"'
-    +':{\"width\":320,\"height\":180,\"frameRate\":15,\"bitRate\":140}}');
+    AgoraRtcEngine.setParameters('{\"che.video.lowBitRateStreamParameter\"' +
+        ':{\"width\":320,\"height\":180,\"frameRate\":15,\"bitRate\":140}}');
     // join channel corresponding to current group
     AgoraRtcEngine.joinChannel(null, widget.groupId, null, 0);
   }
@@ -128,9 +128,7 @@ class VideoRoomState extends State<VideoRoom>{
   /// Helper function to get list of native views
   List<Widget> _getRenderViews() {
     List<Widget> list = [AgoraRenderWidget(0, local: true, preview: true)];
-    _users.forEach((int uid) => {
-      list.add(AgoraRenderWidget(uid))
-    });
+    _users.forEach((int uid) => {list.add(AgoraRenderWidget(uid))});
     return list;
   }
 
@@ -144,10 +142,9 @@ class VideoRoomState extends State<VideoRoom>{
     List<Widget> wrappedViews =
         views.map((Widget view) => _videoView(view)).toList();
     return Expanded(
-      child: Row(
-        children: wrappedViews,
-      )
-    );
+        child: Row(
+      children: wrappedViews,
+    ));
   }
 
   /// Video layout wrapper
@@ -234,45 +231,36 @@ class VideoRoomState extends State<VideoRoom>{
   /// Info panel to show logs
   Widget _panel() {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 48),
-      alignment: Alignment.bottomCenter,
-      child: FractionallySizedBox(
-        heightFactor: 0.5,
-        child: Container(
-          padding: EdgeInsets.symmetric(vertical: 48),
-          child: ListView.builder(
-            reverse: true,
-            itemCount: _infoStrings.length,
-            itemBuilder: (BuildContext context, int index) {
-              if (_infoStrings.length == 0) {
-                return null;
-              }
-              return Padding(
-                padding: EdgeInsets.symmetric(vertical: 3, horizontal: 10),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min, 
-                  children: [
-                    Flexible(
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                          vertical: 2, horizontal: 5),
-                        decoration: BoxDecoration(
-                          color: Colors.yellowAccent,
-                          borderRadius: BorderRadius.circular(5)),
-                        child: Text(
-                          _infoStrings[index],
-                          style:TextStyle(color: Colors.blueGrey)
-                        )
-                      )
-                    )
-                  ]
-                )
-              );
-            }
-          )
-        ),
-      )
-    );
+        padding: EdgeInsets.symmetric(vertical: 48),
+        alignment: Alignment.bottomCenter,
+        child: FractionallySizedBox(
+          heightFactor: 0.5,
+          child: Container(
+              padding: EdgeInsets.symmetric(vertical: 48),
+              child: ListView.builder(
+                  reverse: true,
+                  itemCount: _infoStrings.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    if (_infoStrings.length == 0) {
+                      return null;
+                    }
+                    return Padding(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 3, horizontal: 10),
+                        child: Row(mainAxisSize: MainAxisSize.min, children: [
+                          Flexible(
+                              child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 2, horizontal: 5),
+                                  decoration: BoxDecoration(
+                                      color: Colors.yellowAccent,
+                                      borderRadius: BorderRadius.circular(5)),
+                                  child: Text(_infoStrings[index],
+                                      style:
+                                          TextStyle(color: Colors.blueGrey))))
+                        ]));
+                  })),
+        ));
   }
 
   void _onCallEnd(BuildContext context) {
@@ -293,13 +281,11 @@ class VideoRoomState extends State<VideoRoom>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
-      body: Center(
-        child: Stack(
+        backgroundColor: Colors.black,
+        body: Center(
+            child: Stack(
           //uncomment _panel for debugging
           children: <Widget>[_viewRows(), _toolbar()],
-        )
-      )
-    );
+        )));
   }
 }
