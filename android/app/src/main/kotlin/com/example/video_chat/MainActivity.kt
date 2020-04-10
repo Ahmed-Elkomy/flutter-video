@@ -1,5 +1,5 @@
 /* Replace package name with your own */
-package com.example.example
+package com.elkomy.videochat
 
 import android.os.Bundle
 
