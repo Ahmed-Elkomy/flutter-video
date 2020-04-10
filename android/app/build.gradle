@@ -66,6 +66,14 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     //implementation 'com.google.firebase:firebase-core:15.0.0'
+    //todo firebase librarifies:
+//    implementation'com.google.firebase:firebase-auth:19.3.0'
+//    implementation 'com.google.firebase:firebase-auth:19.3.0'
+//    implementation 'com.google.firebase:firebase-firestore:21.4.2'
+    ///this one for kotlin + KTX android
+//    implementation 'com.google.firebase:firebase-firestore-ktx:21.4.2'
+    // add SDKs for desired Firebase products
+    // https://firebase.google.com/docs/android/setup#available-libraries
 }
 
 //Add to the bottom of the file
